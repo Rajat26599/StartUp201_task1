@@ -1,20 +1,54 @@
-{% extends 'basic_app/base.html' %}
+<!DOCTYPE html>
+<html lang="" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-{% block body_block %}
+    <style media="screen">
+      body {
+        background: skyblue;
+      }
+      .login-card {
+        background-color:white;
+        width:40%;
+        height:400px;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        margin:auto;
+        border-radius:4px;
+        margin-top:100px;
+      }
+      .login-content {
+        text-align: center;
+      }
+      #login-head {
+        padding-top:50px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="container login-card" style="">
+        <div class="container login-content">
+          <h2 id="login-head">Login</h2>
+          <form action="{% url 'basic_app:user_login' %}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+\              <input type="text" class="form-control" id="exampleInputUsername1" name="username" aria-describedby="userHelp" placeholder="Username">
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="Password">
+            </div>
 
-<div class="jumbotron">
-  <h1>Please Login</h1>
-  <form action="{% url 'basic_app:user_login' %}" method="post">
-    {% csrf_token %}
-    <label for="username">Username:</label>
-    <input type="text" name="username" placeholder="Enter Username">
+            <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button><br>
+          </form>
 
-    <label for="password">Password:</label>
-    <input type="password" name="password">
+          <div class="">
+            <p>Don't have an account? <a href="{% url 'basic_app:register' %}">Register here</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <input type="submit" name="" value="Login">
-  </form>
-
-</div>
-
-{% endblock %}
+  </body>
+</html>

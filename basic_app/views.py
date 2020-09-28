@@ -8,6 +8,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+@login_required
 def index(request):
     return render(request, 'basic_app/index.html')
 

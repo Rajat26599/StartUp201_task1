@@ -24,17 +24,34 @@
       #login-head {
         padding-top:50px;
       }
+      .messages {
+        color: red;
+      }
+
+      @media screen and (max-width:600px) {
+        .login-card {
+          width:90%;
+        }
+
     </style>
   </head>
   <body>
     <div class="container">
       <div class="container login-card" style="">
         <div class="container login-content">
-          <h2 id="login-head">Login</h2>
+          <h2 id="login-head">Login</h2><br>
+          {% if messages %}
+          <ul class="messages">
+              {% for message in messages %}
+              <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+              {% endfor %}
+          </ul>
+          {% endif %}
+
           <form action="{% url 'basic_app:user_login' %}" method="post">
             {% csrf_token %}
             <div class="form-group">
-\              <input type="text" class="form-control" id="exampleInputUsername1" name="username" aria-describedby="userHelp" placeholder="Username">
+              <input type="text" class="form-control" id="exampleInputUsername1" name="username" aria-describedby="userHelp" placeholder="Username">
             </div>
             <div class="form-group">
               <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="Password">

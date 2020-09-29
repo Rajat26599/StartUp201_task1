@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from basic_app.forms import UserForm, UserProfileInfoForm
+from django.contrib import messages
 
 #
 from django.contrib.auth import authenticate, login, logout
@@ -63,7 +64,7 @@ def user_login(request):
 
         user = authenticate(username=username, password=password)
 
-        if user:
+        if user is not None:
             if user.is_active:
                 login(request, user)
                 return HttpResponseRedirect(reverse('index'))
@@ -71,6 +72,8 @@ def user_login(request):
             else:
                 return HttpResponse("ACCOUNT NOT ACTIVE")
         else:
+            messages.warning(request, 'Invalid username or password.')
+            return render(request, 'basic_app/login.html')
             print("Someone tried to login and failed!")
             print("Username: {} and Password {}".format(username, password))
     else:
